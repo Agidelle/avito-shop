@@ -1,39 +1,23 @@
-# `/api`
+# 'README'
 
-API сервиса
+Команды:\
+`go run main.go serve` - запуск сервиса\
+`go run main.go migration` - запуск миграций
 
-# `/config`
+Файл `init.sql` также содержит скрипт миграции БД
 
-Конфигурации сервиса
+Структура проекта:\
+`/cmd` - запуск сервиса и миграции\
+`/config` - содержит конфигурации сервиса\
+`/internal/config` - загрузка конфигураций\
+`/internal/http-server` - содержит: auth, handlers и middleware для обработки запросов\
+`/internal/service/shop` - бизнес логика сервиса\
+`/internal/service/shop/storage` - реализация работы с БД
 
-# `/internal/storage`
+Тесты:
+`/internal/http-server/handlers_test.go`\
+`/internal/service/shop/service_test.go`\
+`/internal/service/shop/storage/mysql/mysql_test.go`
 
-Описание моделей сервиса
+# `/xxx`
 
-# `/internal/storage/mysql`
-
-Реализация MYSQL
-
-# `/internal/service`
-
-Бизнес логика
-
-# `/internal/handlers/auth`
-
-Авторизация и регистрация
-
-# `/internal/handlers/handlers`
-
-Логика хэндлеров
-
-# `/internal/middleware`
-
-Проверка JWT
-
-# `/internal/middleware/logger`
-
-Настройки логгера
-
-# `/mocks`
-
-Моки для тестов
