@@ -1,0 +1,13 @@
+env: "dev"
+authKey: "ueEw372kdsRfy"
+http_server:
+  address: "8080"
+  write_timeout: 0.05s
+  idle_timeout: 60s
+db:
+  host: "127.0.0.1"
+  port: "3306"
+  username: "user"
+  password: "password"
+  name: "Avito"
+  test_db_name: "test_db"

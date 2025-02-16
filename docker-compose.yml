@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go_app
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVICE_DB_HOST=127.0.0.1
+    depends_on:
+      db:
+        condition: service_healthy
+    network_mode: host
+
+  db:
+    image: mysql:9.2.0
+    container_name: mysqldb
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 5555
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: "Avito"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 5s
+      retries: 10
+    network_mode: host
+
+volumes:
+  mysql_data:
